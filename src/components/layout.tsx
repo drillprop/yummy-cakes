@@ -4,13 +4,13 @@ import { ThemeProvider, DefaultTheme } from "styled-components"
 import GlobalStyle from "../styles/global"
 
 export const darkTheme: DefaultTheme = {
-  background: "#000",
-  text: "#fff",
+  background: "#212121",
+  text: "#FAFAFA",
 }
 
 export const lightTheme: DefaultTheme = {
-  background: "#fff",
-  text: "#000",
+  background: "#FAFAFA",
+  text: "#212121",
 }
 
 const Layout: React.FC = ({ children }) => {
