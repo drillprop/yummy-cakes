@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components"
 import { normalize } from "styled-normalize"
 
 const GlobalStyle = createGlobalStyle`
-  ${normalize}
+  ${normalize};
   * {
     text-decoration: none;
     /* cursor: none; */
@@ -16,7 +16,8 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
-    background: #fff;
+    color: ${props => props.theme.text};
+    background: ${props => props.theme.background};
     overscroll-behavior: none;
     overflow-x: hidden;
   }
