@@ -1,4 +1,4 @@
-import { CustomTheme } from "./src/styles/global"
+import { CustomTheme } from "./src/styles/global.styles"
 
 declare module "styled-components" {
   export interface DefaultTheme {

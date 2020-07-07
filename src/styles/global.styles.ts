@@ -20,6 +20,7 @@ const GlobalStyle = createGlobalStyle`
     background: ${props => props.theme.background};
     overscroll-behavior: none;
     overflow-x: hidden;
+    transition: background 200ms;
   }
 `
 

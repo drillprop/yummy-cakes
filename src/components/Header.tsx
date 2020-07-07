@@ -1,6 +1,6 @@
 import React from "react"
 import { HeaderNav, Logo, Menu } from "../styles/header.styles"
-import { Wrapper, FlexBox } from "../styles/global"
+import { Wrapper, FlexBox } from "../styles/global.styles"
 import { Link } from "gatsby"
 
 function Header() {
