@@ -1,8 +1,9 @@
 import React from "react"
 
 import { ThemeProvider, DefaultTheme } from "styled-components"
-import GlobalStyle from "../styles/global"
+import GlobalStyle from "../styles/global.styles"
 import Header from "./header"
+import { useGlobalContext } from "../context/GlobalContext"
 
 export const darkTheme: DefaultTheme = {
   background: "#212121",
@@ -15,14 +16,13 @@ export const lightTheme: DefaultTheme = {
 }
 
 const Layout: React.FC = ({ children }) => {
+  const { state } = useGlobalContext()
   return (
-    <>
-      <ThemeProvider theme={lightTheme}>
-        <GlobalStyle />
-        <Header />
-        <main>{children}</main>
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={state.theme === "dark" ? darkTheme : lightTheme}>
+      <GlobalStyle />
+      <Header />
+      <main>{children}</main>
+    </ThemeProvider>
   )
 }
 
