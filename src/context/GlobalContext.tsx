@@ -10,7 +10,7 @@ const initialState = {
 }
 
 const GlobalStateContext = createContext(initialState)
-const GlobalDispatchContext = createContext({})
+const GlobalDispatchContext = createContext<React.Dispatch<Action>>(() => {})
 
 const reducer = (state: typeof initialState, action: Action) => {
   switch (action.type) {
