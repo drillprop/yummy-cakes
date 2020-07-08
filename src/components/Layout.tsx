@@ -4,6 +4,7 @@ import { ThemeProvider, DefaultTheme } from "styled-components"
 import GlobalStyle from "../styles/global.styles"
 import Header from "./header"
 import { useGlobalContext } from "../context/GlobalContext"
+import Cursor from "./Cursor"
 
 export const darkTheme: DefaultTheme = {
   background: "#212121",
@@ -20,6 +21,7 @@ const Layout: React.FC = ({ children }) => {
   return (
     <ThemeProvider theme={state.theme === "dark" ? darkTheme : lightTheme}>
       <GlobalStyle />
+      <Cursor />
       <Header />
       <main>{children}</main>
     </ThemeProvider>

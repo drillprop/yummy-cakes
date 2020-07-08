@@ -5,7 +5,7 @@ const GlobalStyle = createGlobalStyle`
   ${normalize};
   * {
     text-decoration: none;
-    /* cursor: none; */
+    cursor: none;
   }
 
   html {
@@ -80,6 +80,18 @@ export const FlexBox = styled.div<FlexBoxProps>`
     css`
       height: 0;
     `};
+`
+
+export const CustomCursor = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  transform: translate(-50%, -50%);
+  background-color: ${props => props.theme.text};
+  z-index: 99;
 `
 
 export default GlobalStyle
