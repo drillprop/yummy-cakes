@@ -14,8 +14,10 @@ const initialState = {
   cursorType: "default",
 }
 
-const GlobalStateContext = createContext(initialState)
-const GlobalDispatchContext = createContext<React.Dispatch<Action>>(() => {})
+const GlobalContext = createContext<{
+  state: typeof initialState
+  dispatch: React.Dispatch<Action>
+}>({ state: initialState, dispatch: () => {} })
 
 const reducer = (state: typeof initialState, action: Action) => {
   switch (action.type) {
@@ -40,17 +42,12 @@ const reducer = (state: typeof initialState, action: Action) => {
 const GlobalContextProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
   return (
-    <GlobalDispatchContext.Provider value={dispatch}>
-      <GlobalStateContext.Provider value={state}>
-        {children}
-      </GlobalStateContext.Provider>
-    </GlobalDispatchContext.Provider>
+    <GlobalContext.Provider value={{ state, dispatch }}>
+      {children}
+    </GlobalContext.Provider>
   )
 }
 
-export const useGlobalContext = () => ({
-  state: useContext(GlobalStateContext),
-  dispatch: useContext(GlobalDispatchContext),
-})
+export const useGlobalContext = () => useContext(GlobalContext)
 
 export default GlobalContextProvider
