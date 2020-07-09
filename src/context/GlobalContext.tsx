@@ -4,7 +4,12 @@ type Action =
   | { type: "SWITCH_THEME"; theme: "light" | "dark" }
   | { type: "SWITCH_CURSOR"; cursorType: "default" | "pointer" }
 
-const initialState = {
+type InitialState = {
+  theme: "light" | "dark"
+  cursorType: "default" | "pointer"
+}
+
+const initialState: InitialState = {
   theme: "dark",
   cursorType: "default",
 }
