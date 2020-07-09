@@ -1,13 +1,8 @@
 import React, { createContext, useReducer, useContext } from "react"
 
-export enum ReducerType {
-  SWITCH_THEME,
-  SWITCH_CURSOR,
-}
-
 type Action =
-  | { type: ReducerType.SWITCH_THEME; theme: "light" | "dark" }
-  | { type: ReducerType.SWITCH_CURSOR; cursorType: "default" | "pointer" }
+  | { type: "SWITCH_THEME"; theme: "light" | "dark" }
+  | { type: "SWITCH_CURSOR"; cursorType: "default" | "pointer" }
 
 const initialState = {
   theme: "dark",
@@ -21,13 +16,13 @@ const GlobalContext = createContext<{
 
 const reducer = (state: typeof initialState, action: Action) => {
   switch (action.type) {
-    case ReducerType.SWITCH_THEME: {
+    case "SWITCH_THEME": {
       return {
         ...state,
         theme: action.theme,
       }
     }
-    case ReducerType.SWITCH_CURSOR: {
+    case "SWITCH_CURSOR": {
       return {
         ...state,
         cursorType: action.cursorType,
