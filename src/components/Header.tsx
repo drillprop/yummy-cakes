@@ -14,6 +14,12 @@ function Header() {
       dispatch({ type: "SWITCH_THEME", theme: "dark" })
     }
   }
+  const hoverEffects = {
+    onMouseMove: () =>
+      dispatch({ type: "SWITCH_CURSOR", cursorType: "pointer" }),
+    onMouseLeave: () =>
+      dispatch({ type: "SWITCH_CURSOR", cursorType: "default" }),
+  }
 
   return (
     <HeaderNav
@@ -26,11 +32,11 @@ function Header() {
     >
       <Wrapper>
         <FlexBox spaceBetween noHeight>
-          <Logo>
+          <Logo {...hoverEffects}>
             <Link to="/">Yummy Cakes</Link>
           </Logo>
           <Menu>
-            <button>
+            <button {...hoverEffects}>
               <span></span>
               <span></span>
               <span></span>
