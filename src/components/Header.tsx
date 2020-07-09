@@ -2,16 +2,16 @@ import React from "react"
 import { HeaderNav, Logo, Menu } from "../styles/header.styles"
 import { Wrapper, FlexBox } from "../styles/global.styles"
 import { Link } from "gatsby"
-import { useGlobalContext } from "../context/GlobalContext"
+import { useGlobalContext, ReducerType } from "../context/GlobalContext"
 
 function Header() {
   const { dispatch, state } = useGlobalContext()
 
   const toggleTheme = () => {
     if (state.theme === "dark") {
-      dispatch({ type: "SWITCH_THEME", theme: "light" })
+      dispatch({ type: ReducerType.SWITCH_THEME, theme: "light" })
     } else {
-      dispatch({ type: "SWITCH_THEME", theme: "dark" })
+      dispatch({ type: ReducerType.SWITCH_THEME, theme: "dark" })
     }
   }
 
