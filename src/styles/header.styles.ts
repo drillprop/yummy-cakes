@@ -21,7 +21,6 @@ export const Logo = styled.div`
 
 export const Menu = styled.div`
   button {
-    cursor: pointer;
     transform-origin: center;
     border: none;
     padding: 20px;
