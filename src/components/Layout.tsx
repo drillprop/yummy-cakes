@@ -2,7 +2,7 @@ import React from "react"
 
 import { ThemeProvider, DefaultTheme } from "styled-components"
 import GlobalStyle from "../styles/global.styles"
-import Header from "./header"
+import Header from "./Header/Header"
 import { useGlobalContext } from "../context/GlobalContext"
 import Cursor from "./Cursor"
 

@@ -1,8 +1,8 @@
 import React from "react"
-import { HeaderNav, Logo, Menu } from "../styles/header.styles"
-import { Wrapper, FlexBox } from "../styles/global.styles"
+import { HeaderNav, Logo, Menu } from "./header.styles"
+import { Wrapper, FlexBox } from "../../styles/global.styles"
 import { Link } from "gatsby"
-import { useGlobalContext } from "../context/GlobalContext"
+import { useGlobalContext } from "../../context/GlobalContext"
 
 function Header() {
   const { dispatch, state } = useGlobalContext()
