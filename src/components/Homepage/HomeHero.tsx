@@ -11,16 +11,16 @@ const HomeHero = () => {
   useEffect(() => {
     const background = canvas.current
     if (!background) return
-
     const eraser = background.cloneNode() as HTMLCanvasElement
+    if (!eraser) return
+
     const eraserCtx = eraser.getContext("2d")
     const backgroundCtx = background.getContext("2d")
     let lastX: number
     let lastY: number
     let moving = false
 
-    if (!backgroundCtx) return
-    if (!eraser) return
+    if (!backgroundCtx || !eraserCtx) return
 
     backgroundCtx.globalCompositeOperation = "source-over"
     backgroundCtx.fillStyle = "#000000"
@@ -29,28 +29,24 @@ const HomeHero = () => {
     }
 
     background.addEventListener("mouseover", ev => {
-      if (!background) return
       moving = true
       lastX = ev.pageX - background.offsetLeft
       lastY = ev.pageY - background.offsetTop
     })
 
     background.addEventListener("click", ev => {
-      if (!background) return
       moving = true
       lastX = ev.pageX - background.offsetLeft
       lastY = ev.pageY - background.offsetTop
     })
 
     background.addEventListener("mouseup", ev => {
-      if (!background) return
       moving = false
       lastX = ev.pageX - background.offsetLeft
       lastY = ev.pageY - background.offsetTop
     })
 
     background.addEventListener("mousemove", ev => {
-      if (!eraserCtx) return
       if (moving) {
         eraserCtx.globalCompositeOperation = "source-over"
         backgroundCtx.globalCompositeOperation = "destination-out"
