@@ -6,14 +6,21 @@ import Header from "./Header/Header"
 import { useGlobalContext } from "../context/GlobalContext"
 import Cursor from "./Cursor"
 
+const commonTheme = {
+  red: "#8E020C",
+  darkRed: "#51000A",
+}
+
 export const darkTheme: DefaultTheme = {
   background: "#212121",
   text: "#FAFAFA",
+  ...commonTheme,
 }
 
 export const lightTheme: DefaultTheme = {
   background: "#FAFAFA",
   text: "#212121",
+  ...commonTheme,
 }
 
 const Layout: React.FC = ({ children }) => {
