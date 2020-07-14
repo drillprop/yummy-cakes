@@ -10,7 +10,7 @@ type InitialState = {
 }
 
 const initialState: InitialState = {
-  theme: "dark",
+  theme: "light",
   cursorType: "default",
 }
 

@@ -12,14 +12,14 @@ const commonTheme = {
 }
 
 export const darkTheme: DefaultTheme = {
-  background: "#212121",
+  background: "#000",
   text: "#FAFAFA",
   ...commonTheme,
 }
 
 export const lightTheme: DefaultTheme = {
   background: "#FAFAFA",
-  text: "#212121",
+  text: "#000",
   ...commonTheme,
 }
 
