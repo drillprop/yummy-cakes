@@ -9,7 +9,7 @@ export const Hero = styled.div`
   margin-bottom: 250px;
 `
 
-export const Image = styled.div`
+export const ImageWrapper = styled.div`
   height: 100%;
   width: 100%;
   img {

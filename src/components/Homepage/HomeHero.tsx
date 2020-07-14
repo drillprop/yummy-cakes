@@ -1,8 +1,9 @@
 import React, { useRef, useEffect } from "react"
-import { Hero, Image, Canvas, HeroTitle, HeadLine } from "./home.styles"
+import { Hero, Canvas, HeroTitle, HeadLine, ImageWrapper } from "./home.styles"
 import { useWindowSize } from "../../hooks/useWindowSize"
 
-const imageLight = require("../../images/cake-full-light.jpg")
+const imgLightFull = require("../../images/cake-full-light.jpg")
+const imgLightPart = require("../../images/cake-part-light.jpg")
 
 const HomeHero = () => {
   const { width, height } = useWindowSize()
@@ -13,6 +14,11 @@ const HomeHero = () => {
     if (!background) return
     const eraser = background.cloneNode() as HTMLCanvasElement
     if (!eraser) return
+    const image = new Image()
+    image.src = imgLightFull
+    image.style.height = "100%"
+    image.style.width = "100%"
+    image.style.objectFit = "cover"
 
     const eraserCtx = eraser.getContext("2d")
     const backgroundCtx = background.getContext("2d")
@@ -22,36 +28,33 @@ const HomeHero = () => {
 
     if (!backgroundCtx || !eraserCtx) return
 
-    backgroundCtx.globalCompositeOperation = "source-over"
-    backgroundCtx.fillStyle = "#000000"
-    if (width && height) {
-      backgroundCtx.fillRect(0, 0, width, height)
+    image.onload = () => {
+      const pattern = backgroundCtx.createPattern(image, "no-repeat")
+      if (pattern) {
+        backgroundCtx.fillStyle = pattern
+      }
+      if (width && height) {
+        backgroundCtx.fillRect(0, 0, width, height)
+      }
     }
 
-    background.addEventListener("mouseover", ev => {
+    background.addEventListener("mouseover", e => {
       moving = true
-      lastX = ev.pageX - background.offsetLeft
-      lastY = ev.pageY - background.offsetTop
+      lastX = e.pageX - background.offsetLeft
+      lastY = e.pageY - background.offsetTop
     })
 
-    background.addEventListener("click", ev => {
-      moving = true
-      lastX = ev.pageX - background.offsetLeft
-      lastY = ev.pageY - background.offsetTop
-    })
-
-    background.addEventListener("mouseup", ev => {
+    background.addEventListener("mouseup", e => {
       moving = false
-      lastX = ev.pageX - background.offsetLeft
-      lastY = ev.pageY - background.offsetTop
+      lastX = e.pageX - background.offsetLeft
+      lastY = e.pageY - background.offsetTop
     })
 
-    background.addEventListener("mousemove", ev => {
+    background.addEventListener("mousemove", e => {
       if (moving) {
-        eraserCtx.globalCompositeOperation = "source-over"
         backgroundCtx.globalCompositeOperation = "destination-out"
-        const currentX = ev.pageX - background.offsetLeft
-        const currentY = ev.pageY - background.offsetTop
+        const currentX = e.pageX - background.offsetLeft
+        const currentY = e.pageY - background.offsetTop
         eraserCtx.lineJoin = "round"
         eraserCtx.moveTo(lastX, lastY)
         eraserCtx.lineTo(currentX, currentY)
@@ -66,10 +69,10 @@ const HomeHero = () => {
   }, [])
   return (
     <Hero>
-      <Image>
-        <img src={imageLight} alt="cake image" />
-        <Canvas ref={canvas} height={height} width={width}></Canvas>
-      </Image>
+      <ImageWrapper>
+        <img src={imgLightPart} alt="cake image" />
+        <Canvas ref={canvas} height={height} width={width} />
+      </ImageWrapper>
       <HeroTitle>
         <HeadLine>TASTE</HeadLine>
         <HeadLine>OUR CAKES!</HeadLine>
