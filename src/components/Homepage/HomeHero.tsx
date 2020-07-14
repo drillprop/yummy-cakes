@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react"
+import React, { useRef, useEffect, useState } from "react"
 import { Hero, Canvas, HeroTitle, HeadLine, ImageWrapper } from "./home.styles"
 import { useWindowSize } from "../../hooks/useWindowSize"
 
@@ -7,27 +7,27 @@ const imgLightPart = require("../../images/cake-part-light.jpg")
 
 const HomeHero = () => {
   const { width, height } = useWindowSize()
-  const canvas = useRef<null | HTMLCanvasElement>(null)
+  const canvasRef = useRef<null | HTMLCanvasElement>(null)
+  const contextRef = useRef<null | CanvasRenderingContext2D>(null)
+
+  const [isErasing, setIsErasing] = useState(false)
 
   useEffect(() => {
-    const background = canvas.current
+    const background = canvasRef.current
     if (!background) return
-    const eraser = background.cloneNode() as HTMLCanvasElement
-    if (!eraser) return
+
+    const backgroundCtx = background.getContext("2d")
+    if (!backgroundCtx) return
+
+    backgroundCtx.lineCap = "round"
+    backgroundCtx.lineWidth = 120
+    contextRef.current = backgroundCtx
+
     const image = new Image()
-    image.src = imgLightFull
+    image.style.objectFit = "cover"
     image.style.height = "100%"
     image.style.width = "100%"
-    image.style.objectFit = "cover"
-
-    const eraserCtx = eraser.getContext("2d")
-    const backgroundCtx = background.getContext("2d")
-    let lastX: number
-    let lastY: number
-    let moving = false
-
-    if (!backgroundCtx || !eraserCtx) return
-
+    image.src = imgLightFull
     image.onload = () => {
       const pattern = backgroundCtx.createPattern(image, "no-repeat")
       if (pattern) {
@@ -37,41 +37,44 @@ const HomeHero = () => {
         backgroundCtx.fillRect(0, 0, width, height)
       }
     }
-
-    background.addEventListener("mouseover", e => {
-      moving = true
-      lastX = e.pageX - background.offsetLeft
-      lastY = e.pageY - background.offsetTop
-    })
-
-    background.addEventListener("mouseup", e => {
-      moving = false
-      lastX = e.pageX - background.offsetLeft
-      lastY = e.pageY - background.offsetTop
-    })
-
-    background.addEventListener("mousemove", e => {
-      if (moving) {
-        backgroundCtx.globalCompositeOperation = "destination-out"
-        const currentX = e.pageX - background.offsetLeft
-        const currentY = e.pageY - background.offsetTop
-        eraserCtx.lineJoin = "round"
-        eraserCtx.moveTo(lastX, lastY)
-        eraserCtx.lineTo(currentX, currentY)
-        eraserCtx.closePath()
-        eraserCtx.lineWidth = 120
-        eraserCtx.stroke()
-        lastX = currentX
-        lastY = currentY
-        backgroundCtx.drawImage(eraser, 0, 0)
-      }
-    })
   }, [])
+
+  const startErasing = (e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
+    const { offsetX, offsetY } = e.nativeEvent
+    if (!contextRef.current) return
+    contextRef.current.beginPath()
+    contextRef.current.moveTo(offsetX, offsetY)
+    setIsErasing(true)
+  }
+
+  const finishErasing = (
+    e: React.MouseEvent<HTMLCanvasElement, MouseEvent>
+  ) => {
+    if (!contextRef.current) return
+    contextRef.current.closePath()
+    setIsErasing(false)
+  }
+
+  const erase = (e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
+    const { offsetX, offsetY } = e.nativeEvent
+
+    if (!contextRef.current || !isErasing) return
+    contextRef.current.globalCompositeOperation = "destination-out"
+    contextRef.current.lineTo(offsetX, offsetY)
+    contextRef.current.stroke()
+  }
   return (
     <Hero>
       <ImageWrapper>
         <img src={imgLightPart} alt="cake image" />
-        <Canvas ref={canvas} height={height} width={width} />
+        <Canvas
+          width={width}
+          height={height}
+          ref={canvasRef}
+          onMouseOver={startErasing}
+          onMouseUp={finishErasing}
+          onMouseMove={erase}
+        />
       </ImageWrapper>
       <HeroTitle>
         <HeadLine>TASTE</HeadLine>
