@@ -77,8 +77,8 @@ const HomeHero = () => {
         />
       </ImageWrapper>
       <HeroTitle>
-        <HeadLine>TASTE</HeadLine>
-        <HeadLine>OUR CAKES!</HeadLine>
+        <HeadLine>TAKE</HeadLine>
+        <HeadLine>A BITE!</HeadLine>
       </HeroTitle>
     </Hero>
   )
