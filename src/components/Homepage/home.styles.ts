@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { motion } from "framer-motion"
 
 export const Hero = styled.div`
   background: ${props => props.theme.background};
@@ -9,10 +8,10 @@ export const Hero = styled.div`
   margin-bottom: 250px;
 `
 
-export const ImageWrapper = styled.div`
+export const VideoWrapper = styled.div`
   height: 100%;
   width: 100%;
-  img {
+  video {
     height: 100%;
     width: 100%;
     object-fit: cover;
@@ -35,7 +34,20 @@ export const HeroTitle = styled.h1`
 
 export const HeadLine = styled.span`
   font-size: 10rem;
-  display: block;
   font-weight: 900;
   line-height: 0.8;
+  position: relative;
+  z-index: 1;
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    left: 60px;
+    top: 60px;
+    height: 60%;
+    background: ${({ theme }) => theme.background};
+  }
+  :first-of-type::before {
+  }
 `

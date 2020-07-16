@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState } from "react"
-import { Hero, Canvas, HeroTitle, HeadLine, ImageWrapper } from "./home.styles"
+import { Hero, Canvas, HeroTitle, HeadLine, VideoWrapper } from "./home.styles"
 import { useWindowSize } from "../../hooks/useWindowSize"
 
-const imgLightFull = require("../../images/cake-full-light.jpg")
-const imgLightPart = require("../../images/cake-part-light.jpg")
+const img = require("../../assets/cake-full-light.jpg")
+const video = require("../../assets/video.mp4")
 
 const HomeHero = () => {
   const { width, height } = useWindowSize()
@@ -27,7 +27,7 @@ const HomeHero = () => {
     image.style.objectFit = "cover"
     image.style.height = "100%"
     image.style.width = "100%"
-    image.src = imgLightFull
+    image.src = img
     image.onload = () => {
       const pattern = backgroundCtx.createPattern(image, "no-repeat")
       if (pattern) {
@@ -65,8 +65,8 @@ const HomeHero = () => {
   }
   return (
     <Hero>
-      <ImageWrapper>
-        <img src={imgLightPart} alt="cake image" />
+      <VideoWrapper>
+        <video muted autoPlay loop playsInline src={video} />
         <Canvas
           width={width}
           height={height}
@@ -75,9 +75,10 @@ const HomeHero = () => {
           onMouseUp={finishErasing}
           onMouseMove={erase}
         />
-      </ImageWrapper>
+      </VideoWrapper>
       <HeroTitle>
         <HeadLine>TAKE</HeadLine>
+        <br />
         <HeadLine>A BITE!</HeadLine>
       </HeroTitle>
     </Hero>
