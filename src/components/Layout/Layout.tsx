@@ -1,10 +1,10 @@
 import React from "react"
 
 import { ThemeProvider, DefaultTheme } from "styled-components"
-import GlobalStyle from "../styles/global.styles"
-import Header from "./Header/Header"
-import { useGlobalContext } from "../context/GlobalContext"
-import Cursor from "./Cursor"
+import GlobalStyle from "../../styles/global.styles"
+import Header from "../Header/Header"
+import { useGlobalContext } from "../../context/GlobalContext"
+import Cursor from "../Cursor/Cursor"
 
 const commonTheme = {
   red: "#8E020C",

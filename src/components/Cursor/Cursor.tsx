@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
-import { CustomCursor } from "../styles/global.styles"
-import { useGlobalContext } from "../context/GlobalContext"
+import { useGlobalContext } from "../../context/GlobalContext"
+import { CustomCursor } from "./cursor.styles"
 
 const Cursor = () => {
   const { state } = useGlobalContext()
