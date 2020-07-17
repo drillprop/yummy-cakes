@@ -15,7 +15,7 @@ const initialState: InitialState = {
 }
 
 const GlobalContext = createContext<{
-  state: typeof initialState
+  state: InitialState
   dispatch: React.Dispatch<Action>
 }>({ state: initialState, dispatch: () => {} })
 
