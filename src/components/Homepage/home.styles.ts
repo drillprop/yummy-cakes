@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { motion } from "framer-motion"
 
 export const Hero = styled.div`
   background: ${props => props.theme.background};
@@ -26,28 +27,20 @@ export const Canvas = styled.canvas`
   display: block;
 `
 
-export const HeroTitle = styled.h1`
+export const HeroTitle = styled(motion.h1)`
   position: absolute;
+  left: 0;
   bottom: -50px;
   color: ${props => props.theme.text};
+  pointer-events: none;
 `
 
-export const HeadLine = styled.span`
+export const HeadLine = styled(motion.span)`
+  display: block;
+  pointer-events: none;
   font-size: 10rem;
   font-weight: 900;
   line-height: 0.8;
   position: relative;
   z-index: 1;
-  &::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    width: 100%;
-    left: 60px;
-    top: 60px;
-    height: 60%;
-    background: ${({ theme }) => theme.background};
-  }
-  :first-of-type::before {
-  }
 `

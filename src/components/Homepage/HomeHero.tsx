@@ -1,9 +1,33 @@
 import React, { useRef, useEffect, useState } from "react"
 import { Hero, Canvas, HeroTitle, HeadLine, VideoWrapper } from "./home.styles"
 import { useWindowSize } from "../../hooks/useWindowSize"
+import { Variants } from "framer-motion"
 
 const img = require("../../assets/cake-full-light.jpg")
 const video = require("../../assets/video.mp4")
+
+const titleAnimation: Variants = {
+  initial: {
+    y: 800,
+  },
+  animate: {
+    y: 0,
+    transition: {
+      staggerChildren: 0.2,
+      ease: [0.5, 0.05, -0.01, 0.9],
+    },
+  },
+}
+
+const headlinesAnimation: Variants = {
+  initial: { y: 400 },
+  animate: {
+    y: 0,
+    transition: {
+      duration: 0.4,
+    },
+  },
+}
 
 const HomeHero = () => {
   const { width, height } = useWindowSize()
@@ -76,10 +100,9 @@ const HomeHero = () => {
           onMouseMove={erase}
         />
       </VideoWrapper>
-      <HeroTitle>
-        <HeadLine>TAKE</HeadLine>
-        <br />
-        <HeadLine>A BITE!</HeadLine>
+      <HeroTitle variants={titleAnimation} initial="initial" animate="animate">
+        <HeadLine variants={headlinesAnimation}>TAKE</HeadLine>
+        <HeadLine variants={headlinesAnimation}> A BITE!</HeadLine>
       </HeroTitle>
     </Hero>
   )
