@@ -1,16 +1,17 @@
 import styled, { css } from "styled-components"
 
 export const CustomCursor = styled.div<{ cursorType: "default" | "pointer" }>`
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: fixed;
   border-radius: 100%;
   width: 30px;
   height: 30px;
-  transform: translate(-50%, -50%);
   background-color: ${props => props.theme.text};
-  z-index: 99;
-  transition: transform 200ms;
+  pointer-events: none;
+  z-index: 999;
+  transform: translate(-50%, -50%);
+  transition: all 0.1s ease-out;
+  transition-property: width, height, border;
+  will-change: transform, border;
   ${props =>
     props.cursorType === "pointer" &&
     css`
