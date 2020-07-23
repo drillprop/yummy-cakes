@@ -9,14 +9,13 @@ export const CustomCursor = styled.div<{ cursorType: "default" | "pointer" }>`
   pointer-events: none;
   z-index: 999;
   transform: translate(-50%, -50%);
-  transition: all 0.1s ease-out;
-  transition-property: width, height, border;
-  will-change: transform, border;
+  transition: all 200ms;
+  transition-property: width, height;
   ${props =>
     props.cursorType === "pointer" &&
     css`
       background: transparent;
       transform: translate(-50%, -50%) scale(1.5);
-      border: 3px solid ${props.theme.text};
+      border: 2px solid ${props.theme.text};
     `};
 `
