@@ -3,15 +3,18 @@ import React, { createContext, useReducer, useContext } from "react"
 type Action =
   | { type: "SWITCH_THEME"; theme: "light" | "dark" }
   | { type: "SWITCH_CURSOR"; cursorType: "default" | "pointer" }
+  | { type: "TOOGLE_MENU" }
 
 type InitialState = {
   theme: "light" | "dark"
   cursorType: "default" | "pointer"
+  isMenuVisible: boolean
 }
 
 const initialState: InitialState = {
   theme: "light",
   cursorType: "default",
+  isMenuVisible: false,
 }
 
 const GlobalContext = createContext<{
@@ -19,7 +22,7 @@ const GlobalContext = createContext<{
   dispatch: React.Dispatch<Action>
 }>({ state: initialState, dispatch: () => {} })
 
-const reducer = (state: typeof initialState, action: Action) => {
+const reducer = (state: InitialState, action: Action): InitialState => {
   switch (action.type) {
     case "SWITCH_THEME": {
       return {
@@ -31,6 +34,12 @@ const reducer = (state: typeof initialState, action: Action) => {
       return {
         ...state,
         cursorType: action.cursorType,
+      }
+    }
+    case "TOOGLE_MENU": {
+      return {
+        ...state,
+        isMenuVisible: !state.isMenuVisible,
       }
     }
     default: {
