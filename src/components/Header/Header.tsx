@@ -3,9 +3,11 @@ import { HeaderNav, Logo, Menu } from "./header.styles"
 import { Wrapper, FlexBox } from "../../styles/global.styles"
 import { Link } from "gatsby"
 import { useGlobalContext } from "../../context/GlobalContext"
+import useChangeCursor from "../../hooks/useChangeCursor"
 
 function Header() {
   const { dispatch, state } = useGlobalContext()
+  const changeCursorHandlers = useChangeCursor()
 
   const toggleTheme = () => {
     if (state.theme === "dark") {
@@ -13,12 +15,6 @@ function Header() {
     } else {
       dispatch({ type: "SWITCH_THEME", theme: "dark" })
     }
-  }
-  const hoverEffects = {
-    onMouseMove: () =>
-      dispatch({ type: "SWITCH_CURSOR", cursorType: "pointer" }),
-    onMouseLeave: () =>
-      dispatch({ type: "SWITCH_CURSOR", cursorType: "default" }),
   }
 
   return (
@@ -32,11 +28,11 @@ function Header() {
     >
       <Wrapper>
         <FlexBox spaceBetween noHeight>
-          <Logo {...hoverEffects}>
+          <Logo {...changeCursorHandlers}>
             <Link to="/">Yummy Cakes</Link>
           </Logo>
           <Menu>
-            <button {...hoverEffects}>
+            <button {...changeCursorHandlers}>
               <span></span>
               <span></span>
               <span></span>
