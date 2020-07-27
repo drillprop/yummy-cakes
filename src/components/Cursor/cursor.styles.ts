@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components"
 
 export const CustomCursor = styled.div<{ cursorType: "default" | "pointer" }>`
-  position: fixed;
+  position: absolute;
   border-radius: 100%;
   width: 30px;
   height: 30px;
