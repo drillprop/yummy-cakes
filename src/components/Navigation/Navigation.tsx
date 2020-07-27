@@ -1,10 +1,10 @@
+import { motion } from "framer-motion"
 import { Link } from "gatsby"
 import React from "react"
 import useChangeCursor from "../../hooks/useChangeCursor"
-import { Nav, NavList } from "./navigation.styles"
-import Arrow from "./Arrow"
-import { motion } from "framer-motion"
 import { Wrapper } from "../../styles/global.styles"
+import Arrow from "./Arrow"
+import { Nav, NavList } from "./navigation.styles"
 
 type NavPath = { path: string; id: number; title: string }
 
@@ -48,10 +48,11 @@ const Navigation = () => {
                 },
               }}
               key={id}
-              {...changeCursorHandlers}
             >
               <Arrow />
-              <Link to={path}>{title}</Link>
+              <Link to={path} {...changeCursorHandlers}>
+                {title}
+              </Link>
             </motion.li>
           ))}
         </NavList>
