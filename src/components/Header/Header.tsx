@@ -32,7 +32,10 @@ function Header() {
             <Link to="/">Yummy Cakes</Link>
           </Logo>
           <Menu>
-            <button {...changeCursorHandlers}>
+            <button
+              onClick={() => dispatch({ type: "TOOGLE_MENU" })}
+              {...changeCursorHandlers}
+            >
               <span></span>
               <span></span>
               <span></span>

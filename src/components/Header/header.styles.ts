@@ -20,6 +20,7 @@ export const Logo = styled.div`
 `
 
 export const Menu = styled.div`
+  z-index: 99;
   button {
     transform-origin: center;
     border: none;
