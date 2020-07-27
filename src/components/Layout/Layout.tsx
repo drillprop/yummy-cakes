@@ -5,6 +5,7 @@ import GlobalStyle from "../../styles/global.styles"
 import Header from "../Header/Header"
 import { useGlobalContext } from "../../context/GlobalContext"
 import Cursor from "../Cursor/Cursor"
+import Navigation from "../Navigation/Navigation"
 
 const commonTheme = {
   red: "#8E020C",
@@ -29,6 +30,7 @@ const Layout: React.FC = ({ children }) => {
     <ThemeProvider theme={state.theme === "dark" ? darkTheme : lightTheme}>
       <GlobalStyle />
       <Cursor />
+      {state.isMenuVisible && <Navigation />}
       <Header />
       <main>{children}</main>
     </ThemeProvider>
