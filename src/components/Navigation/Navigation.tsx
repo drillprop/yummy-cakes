@@ -2,6 +2,9 @@ import { Link } from "gatsby"
 import React from "react"
 import useChangeCursor from "../../hooks/useChangeCursor"
 import { Nav, NavList } from "./navigation.styles"
+import Arrow from "./Arrow"
+import { motion } from "framer-motion"
+import { Wrapper } from "../../styles/global.styles"
 
 type NavPath = { path: string; id: number; title: string }
 
@@ -32,13 +35,27 @@ const Navigation = () => {
   const changeCursorHandlers = useChangeCursor()
   return (
     <Nav>
-      <NavList>
-        {navPaths.map(({ id, path, title }) => (
-          <li key={id} {...changeCursorHandlers}>
-            <Link to={path}>{title}</Link>
-          </li>
-        ))}
-      </NavList>
+      <Wrapper>
+        <NavList>
+          {navPaths.map(({ id, path, title }) => (
+            <motion.li
+              initial={{ x: -80 }}
+              whileHover={{
+                x: 0,
+                transition: {
+                  duration: 0.4,
+                  ease: [0.5, 0.04, -0.01, 0.8],
+                },
+              }}
+              key={id}
+              {...changeCursorHandlers}
+            >
+              <Arrow />
+              <Link to={path}>{title}</Link>
+            </motion.li>
+          ))}
+        </NavList>
+      </Wrapper>
     </Nav>
   )
 }
